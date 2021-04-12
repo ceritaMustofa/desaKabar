@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="container">
+            <h5>{{ post.title }}</h5>
+            <p class="text-muted">{{ post.date_added }}</p>
+            <img src="{{ post.image.url }}" alt="image" class="img-fluid" style="width: 800px; height:450px">
+            <p>{{ post.content | safe }}</p> 
+        </div>
+
+        <hr>
+
+        <div class="container">
+        <h4 class="fw-bold">Komentar</h4>
+            {% if post.comments.count <= 0 %}
+                <h5>No comment yet!</h5>
+            {% else %}
+                {% for comment in post.comments.all %}
+                    <h5>{{ comment.name }} | 
+                        <small class=" text-muted fs-6">{{ comment.date_added|timesince }}</small>
+                    </h5>
+                    <p>{{ comment.body|linebreaks }}</p>
+                    <hr/>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <hr>
+
+        <div class="container">
+            <h3> Add Comment</h3>
+            <form method="post" action=".">
+                {% csrf_token %}
+
+                {{ form.as_p }}
+                
+                <div class="field">
+                    <div class="control">
+                        <button>Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+{% endblock %}

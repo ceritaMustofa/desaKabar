@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Berita{% endblock %}
+
+{% block content %}
+<div class="container">
+<h4>Berita</h4>
+<!--news-->
+<div class="content">
+    <div class="container mt-3 content">
+        <div class="row">
+            <div class="col-md-8">
+            <h4>Berita Hari ini</h4>
+                {% for post in page_obj %}
+                    <div class="card border-0 mb-3 cardBerita">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <img class="img-fluid" src="{{ post.image.url }}" alt="image">
+                            </div>
+                            <div class="col-md-7">
+                            <div class="card-body">
+                                <h5 class="card-title">{{post.title}}</h5>
+                                <p class="card-text">{{ post.content | slice:":56" | safe}}</p>
+                                <p class="card-text"><small class="text-muted">Last updated {{post.date_added}}</small></p>
+                                <a href="{% url 'post_details' post.category.slug post.slug %}">Read more</a>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                    <div class="pagination">
+                        <span class="step-links">
+                            {% if page_obj.has_previous %}
+                                <a href="?page=1">&laquo; first</a>
+                                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                            {% endif %}
+
+                            <span class="current">
+                                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                            </span>
+
+                            {% if page_obj.has_next %}
+                                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                            {% endif %}
+                        </span>
+                    </div> 
+            </div>
+            <div class="col-md-4 me-auto">
+            <h4>Kategori Berita</h4>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        {% for category in menu_categories %}
+                        <div class="col-mb-3">
+                            <a class="text-decoration-none text-black-50" href="{% url 'category_details' category.slug %}">{{ category.title }}</a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--News end-->
+</div>
+
+{% endblock %}

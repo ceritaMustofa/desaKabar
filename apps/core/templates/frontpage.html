@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<!--slideshow-->
+    <div id="carouselExampleControls" class="carousel slide content" data-bs-ride="carousel">
+        <div class="carousel-inner slideView">
+            {% for sp in slide_post %}
+                {% if forloop.first %}
+                <div class="carousel-item active">
+                {% else %}
+                <div class="carousel-item">
+                {% endif %}
+                    <a href="{% url 'post_details' sp.category.slug sp.slug %}"><img src="{{sp.image.url}}" alt="..."></a>
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>{{sp.title}}</h5>
+                        <p class="card-text">{{ sp.content | slice:":56" | safe}}</p>
+                        <a href="{% url 'post_details' sp.category.slug sp.slug %}">Read more</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+<!--slideshow end--> 
+
+<!--Runing text-->
+    <div class="container">
+        <div class="container panel">
+            <div class="runingtext">
+                <marquee id="runningText" class="fw-bold fs-3"></marquee>
+            </div>
+        </div>
+    </div>
+<!--Runing text end-->
+
+<!--news-->
+<div>
+    <div class="container berita">
+        <div class="row">
+            <div class="col-md-8">
+            <h4 class="fw-bold">Berita Hari ini</h4>
+                {% for post in page_obj %}
+                    <div class="card border-0 mb-3 cardBerita">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <img class="img-fluid" src="{{ post.image.url }}" alt="image">
+                            </div>
+                            <div class="col-md-7">
+                            <div class="card-body">
+                                <h5 class="card-title">{{post.title}}</h5>
+                                <p class="card-text">{{ post.content | slice:":56" | safe}}</p>
+                                <p class="card-text"><small class="text-muted">Last updated {{post.date_added}}</small></p>
+                                <a href="{% url 'post_details' post.category.slug post.slug %}">Read more</a>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                    <div class="pagination">
+                        <span class="step-links">
+                            {% if page_obj.has_previous %}
+                                <a href="?page=1">&laquo; first</a>
+                                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                            {% endif %}
+
+                            <span class="current">
+                                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                            </span>
+
+                            {% if page_obj.has_next %}
+                                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                            {% endif %}
+                        </span>
+                    </div>                
+            </div>
+            <div class="col-md-4 just">
+                <h4 class="fw-bold">Aparatur desa</h4>
+                <div class="container-aparat">
+                    <div id="slideControls" class="carousel slide slide-aparat" data-bs-ride="carousel">
+                        <div class="carousel-inner slideView">
+                            {% for a in aparat %}
+                                {% if forloop.first %}
+                                    <div class="carousel-item active">
+                                {% else %}
+                                <div class="carousel-item">
+                                {% endif %}
+                                    <a href="#"><img src="{{a.thumbnail.url}}" alt="..."></a>
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>{{a.name}}</h5>
+                                        <p class="card-text">{{ a.position}}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#slideControls" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#slideControls" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#a2d9ff" fill-opacity="1" d="M0,192L30,170.7C60,149,120,107,180,
+            112C240,117,300,171,360,160C420,149,480,75,540,69.3C600,64,660,128,720,154.7C780,181,840,171,900,186.7C960,203,1020,245,1080,
+            245.3C1140,245,1200,203,1260,202.7C1320,203,1380,245,1410,
+            266.7L1440,288L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,
+            320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"></path></svg>
+</div>
+<!--News end-->
+
+<!--Contact-->
+<div class="s-contact">
+    <div class="container">
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+            <h4 class="fw-bold">Contact</h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+            <h4>Our location</h4>
+            </div>
+            <div class="col-md-4">
+            <h4>Feel free to contact us</h4>
+                <form>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">First Name</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="First Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Last Name</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Last Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Email address</label>
+                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Comment</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Contact end-->
+{% endblock content %}

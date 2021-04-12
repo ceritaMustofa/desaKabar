@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+    <div class="container-fluid content">
+        <div class="row">
+            <div class="col-md-2">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-end border-2">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sideNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="sideNav">
+                        <div class="d-flex flex-column bd-highlight mb-3">
+                            {% for post in menu %}
+                                <a href="{% url 'profileDesa_details' post.title %}" class="nav-link">{{ post.category }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="col-md-10">
+                <div class="container">
+                    <h5>{{ post.title }}</h5>
+                    <p class="text-muted">{{ post.date_added }}</p>
+                    <img src="{{ post.image.url }}" alt="image" class="img-fluid" style="width: 800px; height:450px">
+                    <p>{{ post.content | safe }}</p> 
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

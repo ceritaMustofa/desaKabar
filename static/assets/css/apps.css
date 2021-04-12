@@ -1,0 +1,80 @@
+.content {
+    margin-top: 73px;
+}
+
+.cardBerita:hover{
+    box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.2);
+}
+
+.carousel{
+    margin-top: 50px;
+}
+
+.carousel-item {
+    height: 500px;
+    overflow: hidden;
+    width: 100%;
+}
+  
+.carousel-item img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.carousel button{
+    background: transparent;
+    border: none;
+}
+
+.panel {
+    position: absolute;
+    box-shadow: 0 3px 20px rgba(0, 0, 0, 0.5);
+    height: 50px;
+    margin-top: -20px;
+    border-radius: 50px;
+    background-color: rgb(189, 189, 189);
+    z-index: 3;
+}
+
+.berita{
+    margin-top: 50px;
+}
+
+.container-aparat{
+    width: 70%;
+}
+
+.container-aparat .carousel-item{
+    height: 300px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.container-aparat .carousel-item img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.carousel-caption{
+    background-color: rgba(94, 92, 92, 0.592);
+}
+
+svg{
+    margin-top: -73px;
+}
+
+.s-contact{
+    background-color: #a2d9ff;
+    margin-top: -1px;
+}
+
+
+.footer {
+    display: flex;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+}
+
