@@ -24,6 +24,10 @@ from apps.blog.views import indexBerita, post_detail, category_detail
 from apps.profiledesa.views import indexProfileDesa, profileDesa_details 
 from apps.statistikdesa.views import statistik_penduduk
 
+#Django admin customization
+admin.site.site_header = "Admin Desa Kabar"
+admin.site.site_title = "Admin Desa Kabar"
+admin.site.index_title = "Desa Kabar"
 
 urlpatterns = [
     path('', frontpage, name='home'),
@@ -34,8 +38,8 @@ urlpatterns = [
 
 
     #blog
-    path('<slug:slug>/', category_detail, name='category_details'),
     path('<slug:category_slug>/<slug:slug>/', post_detail, name='post_details'),
+    path('<slug:slug>/', category_detail, name='category_details'),
 
     #profile desa
     path('<str:title>/', profileDesa_details, name='profileDesa_details'),    

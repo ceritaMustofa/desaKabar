@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,12 +20,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'qu1$y+dsed^2ap2b(^94n!7^ef7=g@=$l-(()#^dvsni6ez0$4'
+with open(os.path.join(BASE_DIR,  'secret_key.txt')) as f:
+    SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','greatsaka.com', 'www.greatsaka.com']
 
 
 # Application definition
@@ -87,8 +88,12 @@ WSGI_APPLICATION = 'desakabar.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'desakabar',
+        'HOST': 'localhost',
+        'PORT': '8000',
+        'USER': 'root',
+        'PASSWORD': 'Penguin',
     }
 }
 
@@ -134,3 +139,13 @@ STATICFILES_DIRS = (str(BASE_DIR.joinpath('static')),)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media/'
+
+#HTTPS settings
+#SESSION_COOKIE_SECURE = True
+#CSRF_COOKIE_SECURE = True
+#SECURE_SSL_REDIRECT = True
+
+#HSTS settings 
+#SECURE_HSTS_SECONDS = 31536000 # 1 YEAR
+#SECURE_HSTS_PRELOAD = True
+#SECURE_HSTS_INCLUDE_SUBDOMAINS = True

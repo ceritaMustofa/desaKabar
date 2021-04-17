@@ -10,6 +10,10 @@
     margin-top: 50px;
 }
 
+.carousel-caption a{
+    text-decoration: none;
+}
+
 .carousel-item {
     height: 500px;
     overflow: hidden;
@@ -33,7 +37,7 @@
     height: 50px;
     margin-top: -20px;
     border-radius: 50px;
-    background-color: rgb(189, 189, 189);
+    background-color: #a2d9ff;
     z-index: 3;
 }
 
@@ -57,7 +61,7 @@
     object-fit: cover;
 }
 
-.carousel-caption{
+.caption-aparat{
     background-color: rgba(94, 92, 92, 0.592);
 }
 
