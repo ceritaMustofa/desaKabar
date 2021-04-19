@@ -23,6 +23,7 @@ from apps.core.views import frontpage
 from apps.blog.views import indexBerita, post_detail, category_detail
 from apps.profiledesa.views import indexProfileDesa, profileDesa_details 
 from apps.statistikdesa.views import statistik_penduduk
+from apps.pemerintahan.views import pelayanan
 
 #Django admin customization
 admin.site.site_header = "Admin Desa Kabar"
@@ -34,8 +35,10 @@ urlpatterns = [
     path('blog/', indexBerita, name='indexBerita'),
     path('statistik/', statistik_penduduk, name='statistik_penduduk'),
     path('profile-desa/', indexProfileDesa, name='indexProfileDesa'), 
+    path('pelayanan/', pelayanan, name='pelayanan'),
     path('admin/', admin.site.urls),
 
+    #Download files
 
     #blog
     path('<slug:category_slug>/<slug:slug>/', post_detail, name='post_details'),
@@ -46,5 +49,6 @@ urlpatterns = [
 
     #ckedior
     path('ckeditor/', include('ckeditor_uploader.urls')),
+
 
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

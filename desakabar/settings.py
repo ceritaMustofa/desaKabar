@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'apps.profiledesa',
     'apps.statistikdesa',
     'apps.accounts',
+    'apps.pemerintahan',
 ]
 
 CKEDITOR_UPLOAD_PATH = "ckuploads/"
